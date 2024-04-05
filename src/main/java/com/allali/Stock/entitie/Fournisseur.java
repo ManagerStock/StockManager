@@ -10,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Data
+@DiscriminatorValue("FOUR")
 @AllArgsConstructor @NoArgsConstructor
 @Builder
 public class Fournisseur extends User{

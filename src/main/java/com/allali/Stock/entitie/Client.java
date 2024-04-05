@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@DiscriminatorValue("CLI")
 @Data
 @AllArgsConstructor @NoArgsConstructor
 @Builder
