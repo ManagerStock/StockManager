@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,7 +20,7 @@ public class Article {
     @ManyToOne
     private Category category ;
     @ManyToMany
-    private List<Fournisseur> list ;
+    private List<Fournisseur> list = new ArrayList<>() ;
     @ManyToOne
     private Transition transition ;
 

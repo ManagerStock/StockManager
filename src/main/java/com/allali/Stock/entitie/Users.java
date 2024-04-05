@@ -1,12 +1,12 @@
 package com.allali.Stock.entitie;
 
-import com.allali.Stock.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @DiscriminatorColumn(name = "TYPE" ,length =6 , discriminatorType = DiscriminatorType.STRING)
 @Data @NoArgsConstructor @AllArgsConstructor
 @Builder
-public class User {
+public class Users {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
     private String firstName ;
@@ -25,7 +25,7 @@ public class User {
     private String phoneNumber ;
     private Date dateNaissance ;
     @ManyToMany
-    private List<Role> list ;
+    private List<Role> list = new ArrayList<>();
     @ManyToMany
-    private List<Notification> notificationList ;
+    private List<Notification> notificationList = new ArrayList<>() ;
 }

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,5 +18,5 @@ public class Notification {
     private String objet ;
     private String message ;
     @ManyToMany
-    private List<User> list ;
+    private List<Users> list= new ArrayList<>();
 }

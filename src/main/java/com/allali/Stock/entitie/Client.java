@@ -3,11 +3,10 @@ package com.allali.Stock.entitie;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,8 +14,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor @NoArgsConstructor
 
-public class Client extends User {
+public class Client extends Users {
 
-    @OneToMany(mappedBy = "client")
-    private List<Transition> transitionList ;
+    @OneToMany(mappedBy = "client" , fetch = FetchType.LAZY)
+    private List<Transition> transitionList = new ArrayList<>() ;
 }

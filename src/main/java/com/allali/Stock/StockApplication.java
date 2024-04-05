@@ -15,7 +15,12 @@ public class StockApplication {
 	@Bean
 	CommandLineRunner start(Initiation initiation){
 		return args -> {
-			
+			initiation.initCategory();
+			initiation.initFournisseur();
+			initiation.initClient();
+			initiation.initArticle();
+			initiation.initTransition();
+			initiation.initTransition2();
 		};
 	}
 }

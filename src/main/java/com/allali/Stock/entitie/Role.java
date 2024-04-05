@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,5 +19,5 @@ public class Role {
     private Long id ;
     private UserRole userRole ;
     @ManyToMany
-    private List<User> userList ;
+    private List<Users> usersList = new ArrayList<>();
 }

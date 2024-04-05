@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,8 +24,7 @@ public class Transition {
     private Client client ;
     @ManyToOne
     private Fournisseur fournisseur ;
-    @OneToMany(mappedBy = "transition")
-    private List<Article> articleList ;
-
+    @OneToMany(mappedBy = "transition" , fetch = FetchType.LAZY ,cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Article> articleList = new ArrayList<>() ;
 
 }

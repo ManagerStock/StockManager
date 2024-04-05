@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,7 @@ public class Category {
     private Long id ;
     private String name ;
     private String description ;
-    @OneToMany(mappedBy = "category")
-    private List<Article> list ;
+    @OneToMany(mappedBy = "category" , fetch = FetchType.LAZY)
+    private List<Article> list = new ArrayList<>() ;
 
 }
