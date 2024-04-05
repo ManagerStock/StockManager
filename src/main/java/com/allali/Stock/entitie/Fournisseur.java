@@ -12,10 +12,7 @@ import java.util.List;
 @Data
 @DiscriminatorValue("FOUR")
 @AllArgsConstructor @NoArgsConstructor
-@Builder
 public class Fournisseur extends User{
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id ;
     @ManyToMany(mappedBy = "list")
     private List<Article> articleList ;
     @OneToMany(mappedBy = "fournisseur")

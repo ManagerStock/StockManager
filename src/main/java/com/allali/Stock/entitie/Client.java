@@ -14,10 +14,9 @@ import java.util.List;
 @DiscriminatorValue("CLI")
 @Data
 @AllArgsConstructor @NoArgsConstructor
-@Builder
+
 public class Client extends User {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id ;
+
     @OneToMany(mappedBy = "client")
     private List<Transition> transitionList ;
 }
