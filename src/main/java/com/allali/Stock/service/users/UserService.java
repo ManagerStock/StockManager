@@ -5,8 +5,8 @@ import com.allali.Stock.entitie.Fournisseur;
 import com.allali.Stock.entitie.Users;
 
 public interface UserService {
-    public Fournisseur saveFournisseur(Users user);
-    public Fournisseur updateFournisseur(Users users , Long id);
+    public Fournisseur saveFournisseur(Fournisseur fournisseur);
+    public Fournisseur updateFournisseur(Fournisseur fournisseur , Long id);
     public Client saveClient(Client client);
     public Client updateClient(Client client , Long id);
     public void deleteUser(Long id);

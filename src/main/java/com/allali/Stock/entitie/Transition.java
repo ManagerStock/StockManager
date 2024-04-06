@@ -26,5 +26,7 @@ public class Transition {
     private Fournisseur fournisseur ;
     @OneToMany(mappedBy = "transition" , fetch = FetchType.LAZY ,cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Article> articleList = new ArrayList<>() ;
+    @OneToMany(mappedBy = "transition" , fetch = FetchType.LAZY)
+    private List<PrixAchat> prixAchats ;
 
 }

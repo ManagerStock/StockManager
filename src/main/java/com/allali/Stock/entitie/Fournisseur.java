@@ -17,4 +17,6 @@ public class Fournisseur extends Users {
     private List<Article> articleList= new ArrayList<>();
     @OneToMany(mappedBy = "fournisseur" , fetch = FetchType.LAZY)
     private List<Transition> transitionList = new ArrayList<>() ;
+    @OneToMany(mappedBy = "fournisseur")
+    private List<PrixAchat> prixAchats ;
 }
