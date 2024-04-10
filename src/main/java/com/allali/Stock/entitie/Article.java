@@ -1,5 +1,6 @@
 package com.allali.Stock.entitie;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +19,7 @@ public class Article {
     private Double price ;
     private String brand ;
     @ManyToOne
+    @JsonIgnore
     private Category category ;
     @ManyToMany
     private List<Fournisseur> list = new ArrayList<>() ;

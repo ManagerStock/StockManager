@@ -7,10 +7,11 @@ import com.allali.Stock.exceptions.CategoryNotFoundException;
 import com.allali.Stock.repositorie.ArticleRepository;
 import com.allali.Stock.repositorie.CategoryRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Service
 @Transactional
 @AllArgsConstructor
 public class ArticleServiceImpl implements ArticleService {
@@ -21,12 +22,13 @@ public class ArticleServiceImpl implements ArticleService {
         return articleRepository.save(article);
     }
     @Override
-    public void deleteArticle(Long id) {
+    public void deleteArticle(Long id) throws ArticleNotFound {
         Article article = articleRepository.findById(id).orElse(null);
+        if (article==null) throw new ArticleNotFound("Article Not Found");
         articleRepository.deleteById(id);
-        Category category = article.getCategory();
-        category.getList().remove(article);
-        categoryRepository.save(category);
+        //Category category = article.getCategory();
+        //category.getList().remove(article);
+        //categoryRepository.save(category);
     }
     @Override
     public Article updateArticle(Article article, Long id) throws ArticleNotFound {
