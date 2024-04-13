@@ -14,6 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class UserController {
     private final UserService userService;
+    @PostMapping("/user")
+    public ResponseEntity<Users> saveUser(@RequestBody Users user) {
+        Users savedUser = userService.saveUser(user);
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+    }
+
 
     @PostMapping("/fournisseur")
     public ResponseEntity<Fournisseur> saveFournisseur(@RequestBody Fournisseur fournisseur) {

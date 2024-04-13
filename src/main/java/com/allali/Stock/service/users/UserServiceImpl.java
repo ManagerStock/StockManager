@@ -17,6 +17,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(fournisseur);
     }
     @Override
+    public Users saveUser(Users users) {
+        return userRepository.save(users);
+    }
+    @Override
     public Fournisseur updateFournisseur(Fournisseur fournisseur, Long id) {
         return null;
     }

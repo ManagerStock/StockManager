@@ -12,7 +12,7 @@ public class StockApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StockApplication.class, args);
 	}
-	//@Bean
+	@Bean
 	CommandLineRunner start(Initiation initiation){
 		return args -> {
 			initiation.initCategory();
