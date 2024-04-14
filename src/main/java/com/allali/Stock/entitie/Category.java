@@ -1,5 +1,6 @@
 package com.allali.Stock.entitie;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +18,7 @@ public class Category {
     private String name ;
     private String description ;
     @OneToMany(mappedBy = "category" , fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Article> list = new ArrayList<>() ;
 
 }

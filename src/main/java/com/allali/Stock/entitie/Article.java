@@ -22,6 +22,7 @@ public class Article {
     @JsonIgnore
     private Category category ;
     @ManyToMany
+    @JsonIgnore
     private List<Fournisseur> list = new ArrayList<>() ;
     @ManyToOne
     private Transition transition ;

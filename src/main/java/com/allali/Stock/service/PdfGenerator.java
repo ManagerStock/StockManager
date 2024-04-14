@@ -1,49 +1,81 @@
 package com.allali.Stock.service;
-import com.allali.Stock.entitie.Client;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.allali.Stock.entitie.Client;
+import com.allali.Stock.entitie.Transition;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.List;
 
 @Service
 public class PdfGenerator {
 
-        public byte[] generatePDF(Client client) {
-            Document document = new Document();
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    public byte[] generatePDF(Client client) {
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+             PdfWriter writer = new PdfWriter(outputStream);
+             PdfDocument pdf = new PdfDocument(writer);
+             Document document = new Document(pdf, PageSize.A4)) {
 
-            try {
-                PdfWriter.getInstance(document, outputStream);
-                document.open();
+            // Add header
+            Paragraph header = new Paragraph("Stock Manager")
+                    .setBold()
+                    .setFontSize(16)
+                    .setMarginBottom(20);
+            document.add(header);
 
-                // Add client information to the PDF
-                document.add(new Paragraph("Client ID: " + client.getId()));
-                document.add(new Paragraph("First Name: " + client.getFirstName()));
-                document.add(new Paragraph("Last Name: " + client.getLastName()));
-                document.add(new Paragraph("Email: " + client.getEmail()));
-                document.add(new Paragraph("Address: " + client.getAddress()));
-                document.add(new Paragraph("Phone Number: " + client.getPhoneNumber()));
+            // Add client information
+            document.add(new Paragraph("Client Information:").setBold());
+            Table clientInfoTable = new Table(2);
+            clientInfoTable.addCell("ID:");
+            clientInfoTable.addCell(client.getId().toString());
+            clientInfoTable.addCell("First Name:");
+            clientInfoTable.addCell(client.getFirstName());
+            clientInfoTable.addCell("Last Name:");
+            clientInfoTable.addCell(client.getLastName());
+            clientInfoTable.addCell("Email:");
+            clientInfoTable.addCell(client.getEmail());
+            clientInfoTable.addCell("Address:");
+            clientInfoTable.addCell(client.getAddress());
+            clientInfoTable.addCell("Phone:");
+            clientInfoTable.addCell(client.getPhoneNumber());
+            document.add(clientInfoTable);
 
-                // Add transaction history
-                document.add(new Paragraph("Transaction History:"));
-                client.getTransitionList().forEach(transition ->
-                {
-                    try {
-                        document.add(new Paragraph("Transaction ID: " + transition.getId()));
-                    } catch (DocumentException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
+            // Add transaction history
+            document.add(new Paragraph("\nTransaction History:").setBold());
+            Table transactionTable = new Table(4);
+            transactionTable.addCell("Transaction ID");
+            transactionTable.addCell("Date");
+            transactionTable.addCell("Description");
+            transactionTable.addCell("Amount");
 
-                document.close();
-            } catch (DocumentException e) {
-                e.printStackTrace();
+            List<Transition> transitionList = client.getTransitionList();
+            for (Transition transition : transitionList) {
+                transactionTable.addCell(String.valueOf(transition.getId()));
+                transactionTable.addCell(transition.getTransactionDate().toString()); // Adjust date format as needed
+                transactionTable.addCell(transition.getTransitionType().name());
+                transactionTable.addCell(String.valueOf(transition.getTotalAmount()));
             }
+            document.add(transactionTable);
+
+            // Add footer
+            Paragraph footer = new Paragraph("\nContact Information\nPhone: [06661201254] | Email: stockmanager@gmail.com\n")
+                    .setFontSize(10);
+            document.add(footer);
+
+            // Close the document
+            document.close();
 
             return outputStream.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
+}

@@ -4,6 +4,8 @@ import com.allali.Stock.entitie.Client;
 import com.allali.Stock.entitie.Fournisseur;
 import com.allali.Stock.entitie.Users;
 
+import java.util.List;
+
 public interface UserService {
     public Fournisseur saveFournisseur(Fournisseur fournisseur);
 
@@ -14,4 +16,6 @@ public interface UserService {
     public Client updateClient(Client client , Long id);
     public void deleteUser(Long id);
     public Users getUser(Long id);
+
+    List<Users> users();
 }
