@@ -2,6 +2,7 @@ package com.allali.Stock.entitie;
 
 import com.allali.Stock.enums.TransactionStatus;
 import com.allali.Stock.enums.TransitionType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,8 +26,10 @@ public class Transition {
     @ManyToOne
     private Fournisseur fournisseur ;
     @OneToMany(mappedBy = "transition" , fetch = FetchType.LAZY ,cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Article> articleList = new ArrayList<>() ;
     @OneToMany(mappedBy = "transition" , fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<PrixAchat> prixAchats ;
 
 }

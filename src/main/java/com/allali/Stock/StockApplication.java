@@ -12,15 +12,15 @@ public class StockApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StockApplication.class, args);
 	}
-	//@Bean
+	@Bean
 	CommandLineRunner start(Initiation initiation){
 		return args -> {
 			initiation.initCategory();
 			initiation.initFournisseur();
 			initiation.initClient();
 			initiation.initArticle();
-			initiation.initTransition();
-			initiation.initTransition2();
+			//initiation.initTransition();
+			//initiation.initTransition2();
 		};
 	}
 }

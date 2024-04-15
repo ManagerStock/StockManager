@@ -31,6 +31,7 @@ public class Initiation {
                     Article article = new Article();
                     article.setName(product);
                     article.setCategory(category);
+                    article.setPrice(5540.5);
                     article.getList().add((Fournisseur)user);
                     articleRepository.save(article);
                     ((Fournisseur) user).getArticleList().add(article);

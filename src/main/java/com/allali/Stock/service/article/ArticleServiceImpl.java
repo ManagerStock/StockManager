@@ -47,6 +47,11 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> findAll() {
         return articleRepository.findAll();
     }
+
+    @Override
+    public Article find(Long id){
+        return articleRepository.findById(id).orElse(null);
+    }
     @Override
     public void addArticleToCategory(Long idArtcile,Long idCategorie) throws CategoryNotFoundException, ArticleNotFound {
         Category category = categoryRepository.findById(idCategorie).orElse(null);

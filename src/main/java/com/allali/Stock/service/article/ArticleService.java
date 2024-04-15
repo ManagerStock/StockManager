@@ -11,5 +11,8 @@ public interface ArticleService {
     public void deleteArticle(Long id ) throws ArticleNotFound;
     public Article updateArticle(Article article , Long id) throws ArticleNotFound;
     public List<Article> findAll();
-    public void addArticleToCategory(Long idArtcile ,Long idCategorie) throws CategoryNotFoundException, ArticleNotFound;
+
+    Article find(Long id);
+
+    public void addArticleToCategory(Long idArtcile , Long idCategorie) throws CategoryNotFoundException, ArticleNotFound;
 }
