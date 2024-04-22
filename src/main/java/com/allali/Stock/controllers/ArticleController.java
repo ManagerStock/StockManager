@@ -21,6 +21,10 @@ import java.util.List;
 public class ArticleController {
     private final ArticleService articleService;
     private final CategoryRepository categoryRepository ;
+    @GetMapping("{id}")
+    public Article getArtcile(@PathVariable Long id){
+        return articleService.find(id);
+    }
 
     @PostMapping("/add/{categoryId}")
     public ResponseEntity<Article> addArticle(@RequestBody Article article, @PathVariable Long categoryId) throws CategoryNotFoundException {

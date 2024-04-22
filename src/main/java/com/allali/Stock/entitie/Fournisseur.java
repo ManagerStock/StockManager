@@ -15,8 +15,8 @@ import java.util.List;
 public class Fournisseur extends Users {
     @ManyToMany()
     private List<Article> articleList= new ArrayList<>();
-    @OneToMany(mappedBy = "fournisseur" , fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "fournisseur" , fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Transition> transitionList = new ArrayList<>() ;
-    @OneToMany(mappedBy = "fournisseur")
+    @OneToMany(mappedBy = "fournisseur",cascade = CascadeType.ALL)
     private List<PrixAchat> prixAchats ;
 }

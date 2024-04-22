@@ -2,6 +2,7 @@ package com.allali.Stock.controllers;
 
 import com.allali.Stock.entitie.Category;
 import com.allali.Stock.exceptions.CategoryNotFoundException;
+import com.allali.Stock.repositorie.CategoryRepository;
 import com.allali.Stock.service.category.CategorieService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,11 +16,16 @@ import java.util.List;
 @AllArgsConstructor
 public class CategoryController {
     private final CategorieService categoryService;
+    private final CategoryRepository categoryRepository ;
 
     @PostMapping("/add")
     public ResponseEntity<Category> addCategory(@RequestBody Category category) {
         Category addedCategory = categoryService.addCategorie(category);
         return new ResponseEntity<>(addedCategory, HttpStatus.CREATED);
+    }
+    @GetMapping("{categoryId}")
+    public ResponseEntity<Category> getCategory(@PathVariable Long categoryId) {
+        return new ResponseEntity<>(categoryRepository.findById(categoryId).orElse(null), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{id}")

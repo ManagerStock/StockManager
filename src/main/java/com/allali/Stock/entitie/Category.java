@@ -17,7 +17,7 @@ public class Category {
     private Long id ;
     private String name ;
     private String description ;
-    @OneToMany(mappedBy = "category" , fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category" , fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Article> list = new ArrayList<>() ;
 

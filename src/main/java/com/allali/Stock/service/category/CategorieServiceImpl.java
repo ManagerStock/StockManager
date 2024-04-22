@@ -26,7 +26,7 @@ public class CategorieServiceImpl implements CategorieService {
         if (category1==null) throw new CategoryNotFoundException("Category not found");
         category1.setDescription(category.getDescription());
         category1.setName(category.getName());
-        category1.setList(category.getList());
+        //category1.setList(category.getList());
         return categoryRepository.save(category1);
     }
     @Override

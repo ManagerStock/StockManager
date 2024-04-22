@@ -16,6 +16,6 @@ import java.util.List;
 
 public class Client extends Users {
 
-    @OneToMany(mappedBy = "client" , fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "client" , fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Transition> transitionList = new ArrayList<>() ;
 }
