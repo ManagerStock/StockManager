@@ -37,11 +37,13 @@ public class TransitionController {
 
     @GetMapping("/all")
     public List<Transition> getAllTransition() {
-        List<Transition> transitions = transitionService.findAll();
-        return transitions;
+        return transitionService.findAll();
     }
-    //@DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteTransition(@PathVariable Long id) {
         transitionService.deleteTransition(id);
         return ResponseEntity.noContent().build();
-    }}
+    }
+
+
+}
