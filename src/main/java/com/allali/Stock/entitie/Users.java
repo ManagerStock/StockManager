@@ -24,8 +24,12 @@ public class Users {
     private String address ;
     private String phoneNumber ;
     private Date dateNaissance ;
-    @ManyToMany
+
+    // Lazy loading for list of roles
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Role> list = new ArrayList<>();
-    @ManyToMany
-    private List<Notification> notificationList = new ArrayList<>() ;
+
+    // Lazy loading for list of notifications
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Notification> notificationList = new ArrayList<>();
 }

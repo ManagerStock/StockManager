@@ -18,13 +18,18 @@ public class Article {
     private String description ;
     private Double price ;
     private String brand ;
-    @ManyToOne
+
+    // Lazy loading for category
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private Category category ;
-    @ManyToMany
+
+    // Lazy loading for list of fournisseurs
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Fournisseur> list = new ArrayList<>() ;
-    @ManyToOne
-    private Transition transition ;
 
+    // Lazy loading for transition
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Transition transition ;
 }
