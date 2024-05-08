@@ -22,6 +22,7 @@ public class Transition {
     private TransactionStatus status ;
     private TransitionType transitionType ;
     @ManyToOne
+    @JsonIgnore
     private Client client ;
     @ManyToOne
     private Fournisseur fournisseur ;

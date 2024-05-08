@@ -21,10 +21,10 @@ public class Article {
     @ManyToOne
     @JsonIgnore
     private Category category ;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Fournisseur> list = new ArrayList<>() ;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Transition transition ;
 
 }
