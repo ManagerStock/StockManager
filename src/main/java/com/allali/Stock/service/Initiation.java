@@ -66,7 +66,7 @@ public class Initiation {
                 transition.setStatus(TransactionStatus.COMPLETED);
                 transition.setTransitionType(TransitionType.ACHAT);
                 transition.setClient((Client) user);
-                transition.getArticleList().add(article);
+                transition.getArticle().add(article);
                 ((Client) user).getTransitionList().add(transition);
                 userRepository.save(user);
                 transitionRepository.save(transition);
@@ -75,7 +75,7 @@ public class Initiation {
     }
     public void initTransition2(){
         userRepository.findAll().forEach(user -> {
-              if(user instanceof Fournisseur) {
+            if(user instanceof Fournisseur) {
                 Article article = articleRepository.findById(2L).orElse(null);
                 Transition transition1 = new Transition();
                 transition1.setTotalAmount(2004.5);
@@ -83,7 +83,7 @@ public class Initiation {
                 transition1.setStatus(TransactionStatus.COMPLETED);
                 transition1.setTransitionType(TransitionType.ACHAT);
                 transition1.setFournisseur((Fournisseur)user);
-                transition1.getArticleList().add(article);
+                transition1.getArticle().add(article);
                 ((Fournisseur) user).getTransitionList().add(transition1);
                 article.setTransition(transition1);
                 articleRepository.save(article);

@@ -6,7 +6,7 @@ import com.allali.Stock.entitie.Users;
 
 import java.util.List;
 
-public interface UserService {
+public interface  UserService {
     public Fournisseur saveFournisseur(Fournisseur fournisseur);
 
     Users saveUser(Users users);

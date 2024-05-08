@@ -23,4 +23,6 @@ public class StockApplication {
 			//initiation.initTransition2();
 		};
 	}
-}
+
+	}
+

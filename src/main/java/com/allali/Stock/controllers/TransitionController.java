@@ -39,7 +39,7 @@ public class TransitionController {
     public List<Transition> getAllTransition() {
         return transitionService.findAll();
     }
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTransition(@PathVariable Long id) {
         transitionService.deleteTransition(id);
         return ResponseEntity.noContent().build();
