@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -29,8 +30,22 @@ public class TransitionServiceImpl implements TransitionService {
 
     @Override
     public void deleteTransition(Long id) {
-        transitionRepository.deleteById(id);
-    }
+        Optional<Transition> transitionOptional = transitionRepository.findById(id);
+        if (transitionOptional.isPresent()) {
+            Transition transition = transitionOptional.get();
+            // Delete associated articles
+            List<Article> articles = transition.getArticleList();
+            for (Article article : articles) {
+                article.setTransition(null); // Remove the reference to the transition
+                articleRepository.save(article);
+            }
+            // Clear the article list from the transition
+            transition.getArticleList().clear();
+            // Delete the transition
+            transitionRepository.delete(transition);
+
+
+        }    }
 
     @Override
     public Transition addTransitionClient(Transition transition, Long idClient, Long idArticle) {
