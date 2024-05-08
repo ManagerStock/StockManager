@@ -28,7 +28,7 @@ public class Transition {
     private Fournisseur fournisseur ;
     @OneToMany(mappedBy = "transition", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private List<Article> articleList = new ArrayList<>() ;
+    private List<Article> article = new ArrayList<>() ;
     @OneToMany(mappedBy = "transition", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<PrixAchat> prixAchats ;

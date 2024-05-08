@@ -8,12 +8,12 @@ import com.allali.Stock.repositorie.TransitionRepository;
 import com.allali.Stock.repositorie.UserRepository;
 import com.allali.Stock.service.article.ArticleService;
 import com.allali.Stock.service.users.UserService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -30,22 +30,8 @@ public class TransitionServiceImpl implements TransitionService {
 
     @Override
     public void deleteTransition(Long id) {
-        Optional<Transition> transitionOptional = transitionRepository.findById(id);
-        if (transitionOptional.isPresent()) {
-            Transition transition = transitionOptional.get();
-            // Delete associated articles
-            List<Article> articles = transition.getArticleList();
-            for (Article article : articles) {
-                article.setTransition(null); // Remove the reference to the transition
-                articleRepository.save(article);
-            }
-            // Clear the article list from the transition
-            transition.getArticleList().clear();
-            // Delete the transition
-            transitionRepository.delete(transition);
-
-
-        }    }
+        transitionRepository.deleteById(id);
+    }
 
     @Override
     public Transition addTransitionClient(Transition transition, Long idClient, Long idArticle) {
@@ -56,26 +42,23 @@ public class TransitionServiceImpl implements TransitionService {
         // Set transaction details in the transition entity
         transition.setTransactionDate(new Date());
         transition.setTotalAmount(article.getPrice());
-        client.getTransitionList().add(transition);
-        userRepository.save(client);
-        articleRepository.save(article);
 
-
-        // Set client and article in the transition entity
+        // Set the client and article in the transition entity
         transition.setClient(client);
-        transition.getArticleList().add(article);
-        Transition transition1 =transitionRepository.save(transition);
+        transition.getArticle().add(article);
 
-        client.getTransitionList().add(transition1);
-        article.setTransition(transition);
+        // Add the transition to the client's transition list
+        client.getTransitionList().add(transition);
+
+        // Save the client, which cascades to save the transition as well
         userRepository.save(client);
-        articleRepository.save(article);
 
-        return transition1 ;
-
+        return transition;
     }
 
+
     @Override
+    @JsonIgnore
     public List<Transition> findAll() {
         return transitionRepository.findAll();
     }
